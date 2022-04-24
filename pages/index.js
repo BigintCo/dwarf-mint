@@ -106,7 +106,7 @@ export default function Index() {
             </div>
             <div className="row">
                 <div className="col-6">
-                    <video src="/assets/nfts.mp4" autoPlay muted loop="loop"/>
+                    <video src="https://dwarfassets.s3.eu-west-1.amazonaws.com/nfts.mp4" autoPlay muted loop="loop"/>
                 </div>
                 <div className="col-6">
                     <div className="description">
