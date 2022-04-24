@@ -110,7 +110,7 @@ export default function Index() {
                 </div>
                 <div className="col-6">
                     <div className="description">
-                        <div className="row"><strong>Mint price:</strong><span>1 🔺</span></div>
+                        
                         <div className="row"><strong>Minting date:</strong><span>26 April 2022</span></div>
                         <div className="row"><strong>Total supply:</strong><span>6666</span></div>
                         <div className="row"><strong>Resale royalties:</strong><span>5% for all the NFTs holders</span></div>
