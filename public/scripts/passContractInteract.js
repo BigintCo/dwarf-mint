@@ -1,5 +1,5 @@
 import { ethers } from 'ethers'
-import NFT from '../../artifacts/contracts/testpass.sol/mintPass.json'
+import NFT from '../../artifacts/contracts/pass.sol/mintPass.json'
 import { passContractAdress } from './const'
 
 import { dwarfContractAddress } from "./const";
@@ -11,6 +11,7 @@ export const getOwner = async () => {
     const signer = provider.getSigner()
     const nftContract = new ethers.Contract(passContractAdress, NFT.abi, signer)
     const result = await nftContract.owner();
+    console.log(result);
     return result
 }
 

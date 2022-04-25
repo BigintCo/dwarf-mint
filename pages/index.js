@@ -1,7 +1,7 @@
 import Layout from "../components/layout";
 import Mint from "../components/mint";
 import { useState,useEffect} from 'react'
-import { getPassOwnerBalance,mintNFT,getOwnerTokenIds,isGold,isApproved,approveContract } from "../public/scripts/passContractInteract";
+import { getOwner,getOwnerTokenIds,isGold,isApproved,approveContract } from "../public/scripts/passContractInteract";
 import {getTotalSupply,getOwnerBalance,ogMint,preMint,publicMint,getSaleState } from "../public/scripts/contractIntereact"
 
 export default function Index() {
@@ -86,6 +86,7 @@ export default function Index() {
         isApproved().then((approve)=> setIsApprove(approve))
         getSaleState().then((sState) =>setSaleActive(sState))
         tokenIdsOfOwner()            
+        getOwner().then((res)=>console.log(res));
          
       },[]);
       

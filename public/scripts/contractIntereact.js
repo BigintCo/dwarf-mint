@@ -1,5 +1,5 @@
 import { ethers } from 'ethers'
-import NFT from '../../artifacts/contracts/testd.sol/testdf.json'
+import NFT from '../../artifacts/contracts/dwarf.sol/dwarfknights.json'
 import { dwarfContractAddress } from './const'
 
 
