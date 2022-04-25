@@ -12,7 +12,7 @@ interface IPass {
     function burn(uint256 _tokenId) external;
     function tokenOfOwnerByIndex(address owner, uint256 index) external view returns (uint256);
     function isGold(uint256 tokenId) external returns(bool);
-     function tokensOfOwner(address _owner) external view returns(uint256[] memory );
+    function tokensOfOwner(address _owner) external view returns(uint256[] memory );
 }
 
 contract testdf is ERC721, Ownable {
@@ -20,7 +20,6 @@ contract testdf is ERC721, Ownable {
     Counters.Counter private _tokenIdCounter;
    
     uint256 public constant MAX_SUPPLY = 9999; //  MAX_SUPPLY - My mintPass = number of siblings of my mintPass
-    bytes32 public root; // who can mint?
     string BASE_URI; // What will my mintPass look like?
 
     uint private OG_SALE_PRICE = 1 ether; // avax
@@ -53,7 +52,6 @@ contract testdf is ERC721, Ownable {
     {
         ipass = IPass(passContractAddress);
         BASE_URI = _BASE_URI;
-        // root = merkleroot;
         _tokenIdCounter.increment();
 
     }
@@ -112,10 +110,7 @@ contract testdf is ERC721, Ownable {
     {
         require(IS_OG_SALE_ACTIVE, "OG sale haven't started");
         uint current = _tokenIdCounter.current();
-        // uint256 passBalance = ipass.balanceOf(msg.sender);
         require(current + quantity < MAX_SUPPLY, "Exceeds total supply");
-        // require(passBalance >= quantity, "You don't have enough mintPass");
-        // require(addressToMintCount[msg.sender] + quantity <= NUMBER_OF_TOKENS_ALLOWED_PER_OG, "Exceeds allowance");
         require(msg.value >= calculateMintPrice(quantity, OG_SALE_PRICE), "Not enough money");
         
         uint8 k;
@@ -141,10 +136,7 @@ contract testdf is ERC721, Ownable {
     {
         require(IS_PRE_SALE_ACTIVE, "Presale haven't started");
         uint current = _tokenIdCounter.current();
-        // uint256 passBalance = ipass.balanceOf(msg.sender);
         require(current + quantity < MAX_SUPPLY, "Exceeds total supply");
-        // require(passBalance >= quantity, "You haven't mintPass");
-        // require(addressToMintCount[msg.sender] + quantity < NUMBER_OF_TOKENS_ALLOWED_PER_PRE, "Exceeds allowance");
         require(msg.value >= calculateMintPrice(quantity, PRE_SALE_PRICE), "Not enough money");
         uint8 k;
         uint256[] memory tokenIds = ipass.tokensOfOwner(msg.sender);
@@ -192,11 +184,6 @@ contract testdf is ERC721, Ownable {
 
     function _baseURI() internal view override returns (string memory) {
         return BASE_URI;
-    }
-
-    function tokenURI(uint256 _tokenId) public view virtual override returns (string memory) {
-        require (_exists(_tokenId), "ERC721Metadata: URI query for nonexistent token");
-        return string(abi.encodePacked(_baseURI(), "/", Strings.toString(_tokenId), ".json"));
     }
 
     function totalSupply() public view returns (uint) {
