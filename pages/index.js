@@ -11,7 +11,8 @@ export default function Index() {
     const [ownerBalance, setOwnerBalance] = useState(0);
     const [ogBalance,setOgBalance] = useState(0);
     const [silverBalance,setSilverBalance] = useState(0);
-    const maxSupply = 6666
+    /* const maxSupply = 6666 */
+    const maxSupply = 2222
 
     const Button = () => (    
         <>
@@ -113,7 +114,7 @@ export default function Index() {
                     <div className="description">
                         
                         <div className="row"><strong>Minting date:</strong><span>26 April 2022</span></div>
-                        <div className="row"><strong>Total supply:</strong><span>6666</span></div>
+                        <div className="row"><strong>Total supply:</strong><span>2222</span></div>
                         <div className="row"><strong>Resale royalties:</strong><span>5% for all the NFTs holders</span></div>
                         <div className="row">
                             <strong>Description:</strong>
