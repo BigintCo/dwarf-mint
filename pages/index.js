@@ -16,20 +16,20 @@ export default function Index() {
     const Button = () => (    
         <>
 
-        {totalSupply < maxSupply && isSaleActive == 1 && ogBalance == 0 && ownerBalance == 0 &&
+     {/*  {totalSupply < maxSupply && isSaleActive == 1 && ogBalance == 0 && ownerBalance == 0 &&
             <p>You don't have OG Pass</p>} 
 
         {totalSupply < maxSupply && isSaleActive == 2 && silverBalance == 0 &&
-            <p>You don't have Silver Pass</p>} 
+        <p>You don't have Silver Pass</p>} */}
 
         {isSaleActive != 0 && totalSupply < maxSupply  && 
-        ((ogBalance > 0 && isSaleActive == 1 && isApprove) ||
-        (silverBalance > 0 && isSaleActive == 2 && isApprove) ||
+        ((isSaleActive == 1 && isApprove) ||
+        (isSaleActive == 2 && isApprove) ||
         isSaleActive == 3) &&
             <Mint data={mintFunction} total={totalSupply} max={maxSupply}  ownerBalance={ownerBalance} saleState={isSaleActive}
             ogBalance={ogBalance} silverBalance={silverBalance}/>} 
 
-        {!isApprove && ((isSaleActive == 1 && ogBalance > 0) || (isSaleActive == 2 && silverBalance > 0)) &&
+        {!isApprove && ((isSaleActive == 1) || (isSaleActive == 2)) &&
             <button onClick={approveToDwarf} className="btn">Approve</button>}
     
         {isSaleActive == 0 && totalSupply < maxSupply &&
