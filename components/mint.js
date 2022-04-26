@@ -34,13 +34,6 @@ export default function Mint(props) {
             } else {
                 val--;
 
-                if (props.saleState == 1 && props.ownerBalance +val <= props.ogBalance *5) {
-                    document.getElementById("plusButton").style.display="block"
-                }else if(props.saleState == 2 && val <= props.silverBalance *5){
-                    document.getElementById("plusButton").style.display="block"
-                }else if(props.saleState == 3 && val <= 10 ){
-                    document.getElementById("plusButton").style.display="block"
-                }
 
 
                 if(val < 2 && props.saleState == 1){
