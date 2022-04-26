@@ -9,9 +9,7 @@ export default function Mint(props) {
         document.querySelector(".minusBtn").addEventListener("click", clickHandler);
         document.querySelector(".plusBtn").addEventListener("click", clickHandler);
         
-        if(props.ownerBalance+1 >= props.allowance){
-            document.getElementById("plusButton").style.display="none"
-         }
+       
 
          if(props.saleState == 1){
              setPrice(1)
