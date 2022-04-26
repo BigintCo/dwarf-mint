@@ -99,7 +99,7 @@ export default function Index() {
 
                 </div>
                 <div className="col-6 left">
-                    <h1>Dwarf Nights</h1>
+                    <h1>Dwarf Knights</h1>
                     <p>
                         A Collection of 6666 unique NFTs on Avalanche.
                     </p>
