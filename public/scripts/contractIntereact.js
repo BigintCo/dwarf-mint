@@ -130,8 +130,8 @@ export const ogMint = async (quantity) => {
     const transaction = await nftContract.ogSale(quantity,{ value: value })
     await transaction.wait().then(function(receipt) {
       document.getElementById("mintLink").innerHTML = "Successfully minted click and see!"
-      document.getElementById("mintLink").href = "https://testnet.snowtrace.io/tx/"+receipt.transactionHash
-      // document.getElementById("mintLink").href = "https://snowtrace.io/tx/"+receipt.transactionHash
+      //document.getElementById("mintLink").href = "https://testnet.snowtrace.io/tx/"+receipt.transactionHash
+      document.getElementById("mintLink").href = "https://snowtrace.io/tx/"+receipt.transactionHash
 
   });
 };
@@ -152,8 +152,8 @@ export const preMint = async (quantity) => {
   const transaction = await nftContract.preSale(quantity,{ value: value })
   await transaction.wait().then(function(receipt) {
     document.getElementById("mintLink").innerHTML = "Successfully minted click and see!"
-    document.getElementById("mintLink").href = "https://testnet.snowtrace.io/tx/"+receipt.transactionHash
-    // document.getElementById("mintLink").href = "https://snowtrace.io/tx/"+receipt.transactionHash
+    //document.getElementById("mintLink").href = "https://testnet.snowtrace.io/tx/"+receipt.transactionHash
+     document.getElementById("mintLink").href = "https://snowtrace.io/tx/"+receipt.transactionHash
 
 });
 };
@@ -174,8 +174,8 @@ export const publicMint = async (quantity) => {
   const transaction = await nftContract.publicSale(quantity,{ value: value })
   await transaction.wait().then(function(receipt) {
     document.getElementById("mintLink").innerHTML = "Successfully minted click and see!"
-    document.getElementById("mintLink").href = "https://testnet.snowtrace.io/tx/"+receipt.transactionHash
-    // document.getElementById("mintLink").href = "https://snowtrace.io/tx/"+receipt.transactionHash
+    //document.getElementById("mintLink").href = "https://testnet.snowtrace.io/tx/"+receipt.transactionHash
+    document.getElementById("mintLink").href = "https://snowtrace.io/tx/"+receipt.transactionHash
 
 });
 };
