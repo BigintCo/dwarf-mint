@@ -8,7 +8,6 @@ export default function Mint(props) {
     useEffect(() => {
         document.querySelector(".minusBtn").addEventListener("click", clickHandler);
         document.querySelector(".plusBtn").addEventListener("click", clickHandler);
-        
        
 
          if(props.saleState == 1){
@@ -33,8 +32,6 @@ export default function Mint(props) {
                 val = 1;
             } else {
                 val--;
-
-
 
                 if(val < 2 && props.saleState == 1){
                     setPrice(1)
@@ -76,7 +73,7 @@ export default function Mint(props) {
             </div>
             <div className={styles.mintgroup}>
                 <div className={styles.btngroup}>
-                    {props.total} / 6666
+                    {props.total} / 2222
                 </div>
                 <div className={styles.price}> {price}🔺</div>
             </div>
