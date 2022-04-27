@@ -102,7 +102,7 @@ export default function Index() {
                 <div className="col-6 left">
                     <h1>Dwarf Knights</h1>
                     <p>
-                        A Collection of 6666 unique NFTs on Avalanche.
+                        A Collection of 2222 unique NFTs on Avalanche.
                     </p>
                 </div>
             </div>
