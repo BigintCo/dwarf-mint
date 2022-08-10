@@ -33,17 +33,17 @@ export const getCurrentWalletConnected = async () => {
           };
         } else {
           return {
-            address: "",
+            address: null,
           };
         }
       } catch (err) {
         return {
-          address: "",
+          address: null,
         };
       }
     } else {
       return {
-        address: ""
+        address: null
       };
     }
   };

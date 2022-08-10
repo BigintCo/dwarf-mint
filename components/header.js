@@ -7,6 +7,7 @@ export default function Header() {
     const [walletAddress, setWalletAddress] = useState("");   
 
     const connectWalletPressed = async () => {
+      if(window.ethereum != undefined) { 
 
         const walletResponse = await connectWallet();
         var _chainId = window.ethereum.chainId 
@@ -19,6 +20,8 @@ export default function Header() {
             document.getElementById("mintGroup").innerHTML= ""
 
         }
+      } else
+      document.getElementById("chainCheck").innerHTML = "There is no Cryptowallet";
     };
 
     const addWalletListener = () => {
@@ -60,6 +63,9 @@ export default function Header() {
 
           addWalletListener();
           }
+          else{
+            console.log("Unsupported chain ethereum undfined")
+          }
         };
         prepare()
       }, []);
@@ -73,7 +79,8 @@ export default function Header() {
                             <img src="/assets/img/logo.png" alt="Logo"/>
                         </div>
                     </div>
-                    <div className="col-6 right">
+                    <div className="col-3 right"> <p id="chainCheck"></p> </div>
+                    <div className="col-3 right">
                     {walletAddress ? (
                             "Connected: " +
                             String(walletAddress).substring(0, 6) +
@@ -84,7 +91,7 @@ export default function Header() {
                         <button type='button' onClick={connectWalletPressed} className='btn'>Connect Wallet</button>                        
                     </>
                         )}      
-                        <p id="chainCheck"></p>              
+                                    
                     </div>
                 </div>
                 <hr/>

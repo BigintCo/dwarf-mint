@@ -4,6 +4,7 @@ import { ethers } from 'ethers'
 import { useState,useEffect} from 'react'
 import { getOwner,getOwnerTokenIds,isGold,isApproved,approveContract } from "../public/scripts/passContractInteract";
 import {getTotalSupply,getOwnerBalance,ogMint,preMint,publicMint,getSaleState } from "../public/scripts/contractIntereact"
+import { connectWallet,getCurrentWalletConnected } from '../public/scripts/walletInteract'
 
 export default function Index() {
     const [isApprove, setIsApprove] = useState(false);  
@@ -44,7 +45,7 @@ export default function Index() {
 
         else if(isSaleActive == 0 && totalSupply < maxSupply){
             return (
-                <p>Sale not started</p>
+                <p>Sale not started/ {totalSupply._hex}</p>
             )
         } 
         else if(totalSupply == maxSupply){
@@ -97,29 +98,39 @@ export default function Index() {
          
         })
     }
-    const test =  async () =>{
-        /* await window.ethereum.enable()
-        const provider = new ethers.providers.Web3Provider(window.ethereum) */
-        if(window.ethereum != undefined) { 
-        /* const balance = await provider.getBalance("ethers.eth")
-        console.log(balance); */
-        const accounts = await ethereum.enable()
-        console.log(accounts)
-            
-        } else
-        console.log("ether yok")
-    }
+    
    
     ////
 
     useEffect(() => {
-       test()
-       /*  getTotalSupply().then((tsupply)=> setTotalSupply(tsupply));
-        getOwnerBalance().then((obalance=0)=> setOwnerBalance(obalance));
-        isApproved().then((approve)=> setIsApprove(approve))
-        getSaleState().then((sState) =>setSaleActive(sState))
-        tokenIdsOfOwner()            
-        getOwner().then((res)=>console.log(res)); */
+        if(window.ethereum != undefined) { 
+            const walletResponse =  getCurrentWalletConnected().then(
+                (address)=>{
+                    if(address!=undefined){
+                        console.log("ne bu",address.address)
+                    if(address.address!=null){ 
+                        
+                        getTotalSupply().then((tsupply)=> setTotalSupply(tsupply));
+                        getOwnerBalance().then((obalance=0)=> setOwnerBalance(obalance));
+                        isApproved().then((approve)=> setIsApprove(approve))
+                        getSaleState().then((sState) =>setSaleActive(sState))
+                        tokenIdsOfOwner()            
+                        getOwner().then((res)=>console.log(res)); 
+                         console.log("wallet bağlandı")
+                        console.log("adres",address)
+                    }
+                    else{
+                        console.log("adres sıfır")
+                        console.log("adres",address)
+                    }
+                    }else
+                    console.log("wallet bağlanmadı")
+                    console.log(address)
+                } 
+            );
+            
+        } else
+        console.log("ether yok genel")
          
       },[]);
       
