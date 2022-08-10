@@ -98,6 +98,7 @@ export const getOwnerBalance = async () => {
     const nftContract = new ethers.Contract(dwarfContractAddress, NFT.abi, signer)
     try {
       const result = await nftContract.balanceOf(window.ethereum.selectedAddress);
+      console.log("ogBalance",result.toNumber());
       return result;
     } catch (error) {
       return 0;

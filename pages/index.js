@@ -83,8 +83,8 @@ export default function Index() {
     useEffect(() => {
         getTotalSupply().then((tsupply)=> setTotalSupply(tsupply.toNumber()));
         getOwnerBalance().then((obalance)=> setOwnerBalance(obalance.toNumber()));
-        isApproved().then((approve)=> setIsApprove(approve))
-        getSaleState().then((sState) =>setSaleActive(sState))
+        isApproved().then((approve)=> setIsApprove(1))
+        getSaleState().then((sState) =>setSaleActive(1))
         tokenIdsOfOwner()            
         getOwner().then((res)=>console.log(res));
          
