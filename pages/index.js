@@ -45,7 +45,8 @@ export default function Index() {
 
         else if(isSaleActive == 0 && totalSupply < maxSupply){
             return (
-                <p>Sale not started/ {totalSupply._hex}</p>
+                <p>Sale not started</p>
+                
             )
         } 
         else if(totalSupply == maxSupply){
@@ -110,16 +111,18 @@ export default function Index() {
                         console.log("ne bu",address.address)
                     if(address.address!=null){ 
                         
-                        getTotalSupply().then((tsupply)=> setTotalSupply(tsupply));
-                        getOwnerBalance().then((obalance=0)=> setOwnerBalance(obalance));
-                        isApproved().then((approve)=> setIsApprove(approve))
-                        getSaleState().then((sState) =>setSaleActive(sState))
+                        getTotalSupply().then((tsupply)=> setTotalSupply(tsupply.toNumber()));
+                        getOwnerBalance().then((obalance=0)=> setOwnerBalance(obalance.toNumber()));
+                        isApproved().then((approve)=> setIsApprove(1))
+                        getSaleState().then((sState) =>setSaleActive(1))
                         tokenIdsOfOwner()            
                         getOwner().then((res)=>console.log(res)); 
                          console.log("wallet bağlandı")
                         console.log("adres",address)
                     }
                     else{
+                        setSaleActive(1)
+                        setIsApprove(0)
                         console.log("adres sıfır")
                         console.log("adres",address)
                     }

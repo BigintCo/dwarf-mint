@@ -62,6 +62,7 @@ export default function Mint(props) {
             }
 
             if (props.saleState == 1 && props.ownerBalance +val >= props.ogBalance *5) {
+                console.log(props.ownerBalance +val,">=",props.ogBalance *5)
                 document.getElementById("plusButton").style.display="none"
             }else if(props.saleState == 2 && val >= props.silverBalance *5){
                 document.getElementById("plusButton").style.display="none"
