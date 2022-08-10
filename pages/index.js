@@ -1,5 +1,6 @@
 import Layout from "../components/layout";
 import Mint from "../components/mint";
+import { ethers } from 'ethers'
 import { useState,useEffect} from 'react'
 import { getOwner,getOwnerTokenIds,isGold,isApproved,approveContract } from "../public/scripts/passContractInteract";
 import {getTotalSupply,getOwnerBalance,ogMint,preMint,publicMint,getSaleState } from "../public/scripts/contractIntereact"
@@ -13,36 +14,54 @@ export default function Index() {
     const [silverBalance,setSilverBalance] = useState(0);
     const maxSupply = 6666
 
-    const Button = () => (    
-        <>
+    function MintButton() {
+        if (totalSupply < maxSupply && isSaleActive == 1 && ogBalance == 0 && ownerBalance == 0) {
+            return (
+                <p>You don't have OG Pass</p>
+            )
+            
+        } else if(totalSupply < maxSupply && isSaleActive == 2 && silverBalance == 0){
+            return (
+                <p>You don't have Silver Pass</p>
+            )
+        } 
 
-        {totalSupply < maxSupply && isSaleActive == 1 && ogBalance == 0 && ownerBalance == 0 &&
-            <p>You don't have OG Pass</p>} 
+        else if(isSaleActive != 0 && totalSupply < maxSupply  && 
+            ((isSaleActive == 1 && isApprove) ||
+            (isSaleActive == 2 && isApprove) ||
+            isSaleActive == 3)){
+            return (
+                <Mint data={mintFunction} total={totalSupply} max={maxSupply}  ownerBalance={ownerBalance} saleState={isSaleActive}
+                ogBalance={ogBalance} silverBalance={silverBalance}/>
+            )
+        } 
 
-        {totalSupply < maxSupply && isSaleActive == 2 && silverBalance == 0 &&
-            <p>You don't have Silver Pass</p>} 
+        else if(!isApprove && ((isSaleActive == 1) || (isSaleActive == 2))){
+            return (
+                <button onClick={approveToDwarf} className="btn">Approve</button>
+            )
+        } 
 
-        {isSaleActive != 0 && totalSupply < maxSupply  && 
-        ((ogBalance > 0 && isSaleActive == 1 && isApprove) ||
-        (silverBalance > 0 && isSaleActive == 2 && isApprove) ||
-        isSaleActive == 3) &&
-            <Mint data={mintFunction} total={totalSupply} max={maxSupply}  ownerBalance={ownerBalance} saleState={isSaleActive}
-            ogBalance={ogBalance} silverBalance={silverBalance}/>} 
-
-        {!isApprove && ((isSaleActive == 1 && ogBalance > 0) || (isSaleActive == 2 && silverBalance > 0)) &&
-            <button onClick={approveToDwarf} className="btn">Approve</button>}
+        else if(isSaleActive == 0 && totalSupply < maxSupply){
+            return (
+                <p>Sale not started</p>
+            )
+        } 
+        else if(totalSupply == maxSupply){
+            return (
+                <p>Sold Out</p>
+            )
+        } 
+        
+        else if(totalSupply < maxSupply && ((ownerBalance != 0 && ogBalance == 0 && isSaleActive == 1) ||
+        (ownerBalance != 0 && silverBalance == 0 && isSaleActive == 2 ))){
+            return (
+                <p>Already Minted</p>
+            )
+        } 
+        
     
-        {isSaleActive == 0 && totalSupply < maxSupply &&
-            <p>Sale not started</p>} 
-    
-        { totalSupply == maxSupply &&
-            <p>Sold out</p>} 
-    
-        {totalSupply < maxSupply && ((ownerBalance != 0 && ogBalance == 0 && isSaleActive == 1) ||
-        (ownerBalance != 0 && silverBalance == 0 && isSaleActive == 2 )) &&
-            <p>Already minted</p>} 
-        </>
-       )
+    }
 
     const approveToDwarf = () => {
         approveContract().then((res) => setIsApprove(res))
@@ -78,15 +97,29 @@ export default function Index() {
          
         })
     }
+    const test =  async () =>{
+        /* await window.ethereum.enable()
+        const provider = new ethers.providers.Web3Provider(window.ethereum) */
+        if(window.ethereum != undefined) { 
+        /* const balance = await provider.getBalance("ethers.eth")
+        console.log(balance); */
+        const accounts = await ethereum.enable()
+        console.log(accounts)
+            
+        } else
+        console.log("ether yok")
+    }
+   
     ////
 
     useEffect(() => {
-        getTotalSupply().then((tsupply)=> setTotalSupply(tsupply.toNumber()));
-        getOwnerBalance().then((obalance)=> setOwnerBalance(obalance.toNumber()));
+       test()
+       /*  getTotalSupply().then((tsupply)=> setTotalSupply(tsupply));
+        getOwnerBalance().then((obalance=0)=> setOwnerBalance(obalance));
         isApproved().then((approve)=> setIsApprove(approve))
         getSaleState().then((sState) =>setSaleActive(sState))
         tokenIdsOfOwner()            
-        getOwner().then((res)=>console.log(res));
+        getOwner().then((res)=>console.log(res)); */
          
       },[]);
       
@@ -94,7 +127,7 @@ export default function Index() {
         <div className="container">
             <div className="row row-flex row-flex-top">
                 <div className="col-6 center" id="mintGroup">
-                    <Button/>
+                    <MintButton/>
                     <a id="mintLink" href="#"></a>
 
                 </div>
@@ -126,6 +159,7 @@ export default function Index() {
                             <p>
                                 Public Sale costs 1.5 AVAX🔺 & will be open for everyone. 10 Dwarf Knights NFTs is the limit per transaction.
                             </p>
+                           
                         </div>
                         <div className="row links">
                             <ul>

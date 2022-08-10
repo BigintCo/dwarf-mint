@@ -47,6 +47,7 @@ export default function Header() {
 
     useEffect(() => {
         const prepare = async () => {
+          if(window.ethereum != undefined) { 
             const walletResponse = await getCurrentWalletConnected();
 
             if (window.ethereum.chainId == wchainId) {
@@ -58,7 +59,7 @@ export default function Header() {
             }
 
           addWalletListener();
-
+          }
         };
         prepare()
       }, []);

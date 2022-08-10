@@ -28,9 +28,13 @@ export const getTotalSupply = async () => {
     // var signerAdress = await signer.getAddress();
     const nftContract = new ethers.Contract(dwarfContractAddress, NFT.abi, signer)
     const result = await nftContract.totalSupply();
+    console.log("result");
+    console.log(result);
     return result;
 
   } catch (error) {
+    console.log("error");
+    console.log(error);
     return 0;
   }
   
